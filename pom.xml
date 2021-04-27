@@ -11,7 +11,7 @@
     <modules>
         <module>middleware-api</module>
         <module>middleware-model</module>
-        <module>middleware-com.felix.middleware.server</module>
+        <module>middleware-server</module>
     </modules>
 
     <properties>
