@@ -23,7 +23,7 @@ public class Generator {
         boolean overwrite = true;
         //读取我们的 MBG 配置文件
         //需要针对不同的模块进行配置
-        InputStream is = Generator.class.getResourceAsStream("/mybatis-config.xml");
+        InputStream is = Generator.class.getResourceAsStream("/generatorConfig.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(is);
         is.close();
