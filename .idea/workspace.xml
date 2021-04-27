@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/redis/CachePassService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/java/com/felix/middleware/model/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/java/com/felix/middleware/model/entity/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/java/com/felix/middleware/model/mapper/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/java/com/felix/middleware/model/mapper/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/resources/com/felix/middleware/model/mapper/ItemMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/resources/com/felix/middleware/model/mapper/ItemMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/redis/CachePassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/redis/CachePassController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619525949608</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="init: Redis缓存穿透">
+      <created>1619529915224</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619529915224</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,7 +258,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init: Mybatis逆向工程生成代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="init: Mybatis逆向工程生成代码" />
+    <MESSAGE value="init: Redis缓存穿透" />
+    <option name="LAST_COMMIT_MESSAGE" value="init: Redis缓存穿透" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="235" key="#Project_Structure" timestamp="1619445912591">
@@ -278,10 +278,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="737" y="440" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500703266" />
-    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619529899991">
+    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619529914488">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529899991" />
+    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529914488" />
     <state x="805" y="331" key="FileChooserDialogImpl" timestamp="1619500353324">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
