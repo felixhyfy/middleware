@@ -2,6 +2,7 @@ package com.felix.middleware.server.service.impl;
 
 import com.felix.middleware.model.entity.RedDetail;
 import com.felix.middleware.model.entity.RedRecord;
+import com.felix.middleware.model.entity.RedRobRecord;
 import com.felix.middleware.model.mapper.RedDetailMapper;
 import com.felix.middleware.model.mapper.RedRecordMapper;
 import com.felix.middleware.model.mapper.RedRobRecordMapper;
@@ -79,6 +80,13 @@ public class RedServiceImpl implements IRedService {
 
     @Override
     public void recordRobRedPacket(Integer userId, String redId, BigDecimal amount) throws Exception {
-        
+        //定义记录抢到红包时录入相关信息的实体对象，并设置相应字段的取值
+        RedRobRecord redRobRecord = new RedRobRecord();
+        redRobRecord.setUserId(userId);
+        redRobRecord.setRedPacket(redId);   //设置红包全局唯一标识串
+        redRobRecord.setAmount(amount);
+        redRobRecord.setRobTime(new Date());
+        //将实体对象信息插入数据库中
+        redRobRecordMapper.insertSelective(redRobRecord);
     }
 }

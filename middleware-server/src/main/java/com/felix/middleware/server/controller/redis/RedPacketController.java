@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 /**
  * @description: 红包处理逻辑Controller
@@ -30,6 +29,13 @@ public class RedPacketController {
     @Autowired
     private IRedPacketService redPacketService;
 
+    /**
+     * 发红包请求
+     *
+     * @param dto
+     * @param result
+     * @return
+     */
     @RequestMapping(value = PREFIX + "/hand/out", method = RequestMethod.POST)
     public BaseResponse handOut(@Validated @RequestBody RedPacketDto dto, BindingResult result) {
         //参数校验
@@ -49,4 +55,32 @@ public class RedPacketController {
         return response;
     }
 
+    /**
+     * 处理抢红包请求
+     *
+     * @param userId 当前用户账户id
+     * @param redId  红包全局唯一标识串参数
+     * @return
+     */
+    @RequestMapping(value = PREFIX + "/rob", method = RequestMethod.GET)
+    public BaseResponse rob(@RequestParam Integer userId, @RequestParam String redId) {
+        BaseResponse response = new BaseResponse(StatusCode.SUCCESS);
+
+        try {
+            //调用抢红包方法，返回抢到的红包金额，单位为元
+            BigDecimal result = redPacketService.rob(userId, redId);
+            if (result != null) {
+                //抢到了，将抢到的红包金额返回给前端
+                response.setData(result);
+            } else {
+                //没有抢到
+                response = new BaseResponse(StatusCode.FAIL.getCode(), "红包已被抢完！");
+            }
+        } catch (Exception e) {
+            log.error("抢红包发生异常：userId={} redId={}", userId, redId, e.fillInStackTrace());
+            response = new BaseResponse(StatusCode.FAIL.getCode(), e.getMessage());
+        }
+        //返回处理结果
+        return response;
+    }
 }
