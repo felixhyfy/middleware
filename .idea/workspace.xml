@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="">
+    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: Redis缓存穿透">
+      <change afterPath="$PROJECT_DIR$/middleware-api/src/main/java/com/felix/middleware/api/enums/StatusCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-api/src/main/java/com/felix/middleware/api/response/BaseResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/redis/RedPacketController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/RedPacketDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IRedPacketService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IRedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/RedPacketServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/RedServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/utils/RedPacketUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/test/java/com/felix/middleware/server/RedPacketTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +28,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -77,7 +91,7 @@
       <recent name="E:\Java\middleware\middleware-server\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Generator">
+  <component name="RunManager" selected="Spring Boot.MainApplication">
     <configuration name="Generator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.felix.middleware.model.Generator" />
       <module name="middleware-model" />
@@ -87,6 +101,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedPacketTest.one" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="middleware-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.felix.middleware.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
+      <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RedPacketTest" />
+      <option name="METHOD_NAME" value="one" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,22 +132,6 @@
       <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
       <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RedisTest2" />
       <option name="METHOD_NAME" value="five" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RedisTest2.four" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="middleware-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.felix.middleware.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
-      <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RedisTest2" />
-      <option name="METHOD_NAME" value="four" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -211,11 +225,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RedisTest2.five" />
+        <item itemvalue="JUnit.RedisTest2.six" />
+        <item itemvalue="JUnit.RedPacketTest.one" />
         <item itemvalue="Application.Generator" />
         <item itemvalue="JUnit.RedisTest2.seven" />
-        <item itemvalue="JUnit.RedisTest2.six" />
-        <item itemvalue="JUnit.RedisTest2.five" />
-        <item itemvalue="JUnit.RedisTest2.four" />
       </list>
     </recent_temporary>
   </component>
@@ -235,6 +249,7 @@
       <workItem from="1619445031251" duration="2542000" />
       <workItem from="1619447704317" duration="458000" />
       <workItem from="1619496031648" duration="7651000" />
+      <workItem from="1619592525345" duration="506000" />
     </task>
     <task id="LOCAL-00001" summary="init: Mybatis逆向工程生成代码">
       <created>1619525949608</created>
@@ -250,11 +265,31 @@
       <option name="project" value="LOCAL" />
       <updated>1619529915224</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="init: Redis缓存穿透">
+      <created>1619530533201</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619530533201</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init: Mybatis逆向工程生成代码" />
@@ -262,14 +297,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="init: Redis缓存穿透" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="617" y="235" key="#Auto_Import" timestamp="1619585254951">
+      <screen x="0" y="0" width="2048" height="1152" />
+    </state>
+    <state x="617" y="235" key="#Auto_Import/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619585254951" />
     <state x="617" y="235" key="#Project_Structure" timestamp="1619445912591">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="617" y="235" key="#Project_Structure/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619445912591" />
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619511839571">
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619585388244">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619511839571" />
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619585388244" />
     <state x="691" y="501" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619522761368">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -278,54 +317,54 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="737" y="440" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500703266" />
-    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619529914488">
+    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619593183390">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529914488" />
+    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183390" />
     <state x="805" y="331" key="FileChooserDialogImpl" timestamp="1619500353324">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="331" key="FileChooserDialogImpl/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500353324" />
-    <state width="2005" height="209" key="GridCell.Tab.0.bottom" timestamp="1619529851785">
+    <state width="2005" height="182" key="GridCell.Tab.0.bottom" timestamp="1619593183461">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851785" />
-    <state width="2005" height="209" key="GridCell.Tab.0.center" timestamp="1619529851785">
+    <state width="2005" height="182" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183461" />
+    <state width="2005" height="182" key="GridCell.Tab.0.center" timestamp="1619593183461">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851785" />
-    <state width="2005" height="209" key="GridCell.Tab.0.left" timestamp="1619529851785">
+    <state width="2005" height="182" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183461" />
+    <state width="2005" height="182" key="GridCell.Tab.0.left" timestamp="1619593183461">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851785" />
-    <state width="2005" height="209" key="GridCell.Tab.0.right" timestamp="1619529851785">
+    <state width="2005" height="182" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183461" />
+    <state width="2005" height="182" key="GridCell.Tab.0.right" timestamp="1619593183461">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851785" />
-    <state width="2005" height="209" key="GridCell.Tab.1.bottom" timestamp="1619529851786">
+    <state width="2005" height="182" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183461" />
+    <state width="2005" height="182" key="GridCell.Tab.1.bottom" timestamp="1619593183462">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851786" />
-    <state width="2005" height="209" key="GridCell.Tab.1.center" timestamp="1619529851786">
+    <state width="2005" height="182" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183462" />
+    <state width="2005" height="182" key="GridCell.Tab.1.center" timestamp="1619593183462">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851786" />
-    <state width="2005" height="209" key="GridCell.Tab.1.left" timestamp="1619529851785">
+    <state width="2005" height="182" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183462" />
+    <state width="2005" height="182" key="GridCell.Tab.1.left" timestamp="1619593183461">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851785" />
-    <state width="2005" height="209" key="GridCell.Tab.1.right" timestamp="1619529851786">
+    <state width="2005" height="182" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183461" />
+    <state width="2005" height="182" key="GridCell.Tab.1.right" timestamp="1619593183462">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="209" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619529851786" />
+    <state width="2005" height="182" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619593183462" />
     <state x="505" y="151" key="SettingsEditor" timestamp="1619516583325">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="505" y="151" key="SettingsEditor/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619516583325" />
-    <state x="705" y="400" key="com.intellij.ide.util.TipDialog" timestamp="1619496033249">
+    <state x="705" y="400" key="com.intellij.ide.util.TipDialog" timestamp="1619592529973">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="705" y="400" key="com.intellij.ide.util.TipDialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619496033249" />
+    <state x="705" y="400" key="com.intellij.ide.util.TipDialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619592529973" />
     <state x="818" y="493" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619445486289">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -334,9 +373,9 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="434" y="271" key="new project wizard/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619441206149" />
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619522981684">
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619530758738">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619522981684" />
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619530758738" />
   </component>
 </project>
