@@ -1,6 +1,7 @@
 package com.felix.middleware.server.rabbitmq.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.felix.middleware.server.rabbitmq.entity.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,27 +27,22 @@ public class BasicConsumer {
      * 由于消息本质是一串二进制数据流，因而监听接收的消息采用字节数组接收
      * @param msg
      */
-    /*@RabbitListener(queues = "${mq.basic.info.queue.name}", containerFactory = "singleListenerContainer")
-    public void consumerMsg(@Payload byte[] msg) {
-        //将字节数组的消息转化为字符串并打印
-        try {
-            String message = new String(msg, "utf-8");
-            log.info("基本消息模型-消费者-监听消费到消息：{}", message);
-        } catch (Exception e) {
-            log.error("基本消息类型-消费者-发生异常：", e.fillInStackTrace());
-        }
-    }*/
     @RabbitListener(queues = "${mq.basic.info.queue.name}",containerFactory = "singleListenerContainer")
     public void consumeMsg(@Payload byte[] msg){
         try {
             String message=new String(msg,"utf-8");
             log.info("基本消息模型-消费者-监听消费到消息：{} ",message);
-
-
         }catch (Exception e){
             log.error("基本消息模型-消费者-发生异常：",e.fillInStackTrace());
         }
     }
 
-
+    @RabbitListener(queues = "${mq.object.info.queue.name}", containerFactory = "singleListenerContainer")
+    public void consumeObjectMsg(@Payload Person person) {
+        try {
+            log.info("基本消息类型-监听消费处理对象信息-消费者-监听消费到信息：{}", person);
+        } catch (Exception e) {
+            log.error("基本消息类型-监听消费处理对象类型-消费者-发生异常：", e.fillInStackTrace());
+        }
+    }
 }

@@ -2,7 +2,10 @@ package com.felix.middleware.server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.felix.middleware.server.rabbitmq.entity.EventInfo;
+import com.felix.middleware.server.rabbitmq.entity.Person;
 import com.felix.middleware.server.rabbitmq.publisher.BasicPublisher;
+import com.felix.middleware.server.rabbitmq.publisher.ModelPublisher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -28,10 +31,25 @@ public class RabbitmqTest {
     @Autowired
     private BasicPublisher basicPublisher;
 
+    @Autowired
+    private ModelPublisher modelPublisher;
+
     @Test
     public void test1() throws JsonProcessingException {
         String msg = "~~~这是一个字符串消息~~~";
         //生产者实例发送消息
         basicPublisher.sendMsg(msg);
+    }
+
+    @Test
+    public void test2() {
+        Person p = new Person(1, "大圣", "felix");
+        basicPublisher.sendObjectMsg(p);
+    }
+
+    @Test
+    public void test3() {
+        EventInfo info = new EventInfo(1, "增删改查模块", "基于fanoutExchange的消息模型", "这是基于fanoutExchange的消息模型");
+        modelPublisher.sendMsg(info);
     }
 }

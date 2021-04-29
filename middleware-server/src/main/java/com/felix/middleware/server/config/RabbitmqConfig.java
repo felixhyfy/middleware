@@ -50,7 +50,7 @@ public class RabbitmqConfig {
         factory.setConnectionFactory(connectionFactory);
         //设置消息在传输中的格式，在这里采用JSON的格式进行传输
         //先测试传递简单字符串
-        factory.setMessageConverter(new SimpleMessageConverter());
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
         //设置并发消费者实例的初始数量。在这里为1个
         factory.setConcurrentConsumers(1);
         //设置并发消费者实例的最大数量。在这里为1个
@@ -151,5 +151,79 @@ public class RabbitmqConfig {
     @Bean
     public Binding basicBinding() {
         return BindingBuilder.bind(basicQueue()).to(basicExchange()).with(env.getProperty("mq.basic.info.routing.key.name"));
+    }
+
+    /**
+     * 创建简单消息模型-对象类型：队列、交换机和路由
+     */
+
+    /**
+     * 创建队列
+     * @return
+     */
+    @Bean(name = "objectQueue")
+    public Queue objectQueue() {
+        return new Queue(env.getProperty("mq.object.info.queue.name"), true);
+    }
+
+    /**
+     * 创建交换机
+     * @return
+     */
+    @Bean
+    public DirectExchange objectExchange() {
+        return new DirectExchange(env.getProperty("mq.object.info.exchange.name"), true, false);
+    }
+
+    public Binding objectBinding() {
+        return BindingBuilder.bind(objectQueue()).to(objectExchange()).with(env.getProperty("mq.object.info.routing.key.name"));
+    }
+
+    /**
+     * 创建消息模型-fanoutExchange
+     */
+    /**
+     * 创建队列1
+     * @return
+     */
+    @Bean(name = "fanoutQueueOne")
+    public Queue fanoutQueueOne() {
+        return new Queue(env.getProperty("mq.fanout.queue.one.name"), true);
+    }
+
+    /**
+     * 创建队列2
+     * @return
+     */
+    @Bean(name = "fanoutTwo")
+    public Queue fanoutQueueTwo() {
+        return new Queue(env.getProperty("mq.fanout.queue.two.name"), true);
+    }
+
+    /**
+     * 创建交换机-fanoutExchange
+     * @return
+     */
+    @Bean
+    public FanoutExchange fanoutExchange() {
+        return new FanoutExchange(env.getProperty("mq.fanout.exchange.name"), true, false);
+    }
+
+    /**
+     * 创建绑定1
+     * @return
+     */
+    @Bean
+    public Binding fanoutBindingOne() {
+        return BindingBuilder.bind(fanoutQueueOne()).to(fanoutExchange());
+    }
+
+    /**
+     * 创建绑定2
+     * @return
+     */
+    @Bean
+    public Binding fanoutBindingTwo() {
+        return BindingBuilder.bind(fanoutQueueTwo()).to(fanoutExchange());
     }
 }
