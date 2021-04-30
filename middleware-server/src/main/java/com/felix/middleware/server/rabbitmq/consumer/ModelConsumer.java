@@ -27,10 +27,9 @@ public class ModelConsumer {
      * @param msg
      */
     @RabbitListener(queues = "${mq.fanout.queue.one.name}", containerFactory = "singleListenerContainer")
-    public void consumeFanoutMsgOne(@Payload byte[] msg) {
+    public void consumeFanoutMsgOne(@Payload EventInfo info) {
         try {
             //监听消费队列中的信息，并进行解析处理
-            EventInfo info = objectMapper.readValue(msg, EventInfo.class);
             log.info("消息模型fanoutExchange-one-消费者-监听消费到信息：{}", info);
         } catch (Exception e) {
             log.error("消息模型-消费者-发生异常：", e.fillInStackTrace());
@@ -45,11 +44,67 @@ public class ModelConsumer {
     public void consumeFanoutMsgTwo(@Payload EventInfo info) {
         try {
             //监听消费队列中的信息，并进行解析处理
-            //EventInfo info = objectMapper.readValue(msg, EventInfo.class);
             log.info("消息模型fanoutExchange-one-消费者-监听消费到信息：{}", info);
         } catch (Exception e) {
             log.error("消息模型-消费者-发生异常：", e.fillInStackTrace());
         }
     }
 
+    /**
+     * 监听并消费队列中的消息-directExchange-one
+     * @param info
+     */
+    @RabbitListener(queues = "${mq.direct.queue.one.name}", containerFactory = "singleListenerContainer")
+    public void consumeDirectMsgOne(@Payload EventInfo info) {
+        try {
+            //监听消费队列中的信息，并进行解析处理
+            log.info("消息模型directExchange-one-消费者-监听消费到信息：{}", info);
+        } catch (Exception e) {
+            log.error("消息模型-消费者-发生异常：", e.fillInStackTrace());
+        }
+    }
+
+    /**
+     * 监听并消费队列中的消息-directExchange-two
+     * @param info
+     */
+    @RabbitListener(queues = "${mq.direct.queue.two.name}", containerFactory = "singleListenerContainer")
+    public void consumeDirectMsgTwo(@Payload EventInfo info) {
+        try {
+            //监听消费队列中的信息，并进行解析处理
+            log.info("消息模型directExchange-two-消费者-监听消费到信息：{}", info);
+        } catch (Exception e) {
+            log.error("消息模型-消费者-发生异常：", e.fillInStackTrace());
+        }
+    }
+
+    /**
+     * 监听并消费队列中的消息-topicExchange-*通配符
+     * @param msg
+     */
+    @RabbitListener(queues = "${mq.topic.queue.one.name}", containerFactory = "singleSimpleStringListenerContainer")
+    public void consumeTopicMsgOne(@Payload byte[] msg) {
+        try {
+            //监听消息并进行解析
+            String message = new String(msg, "UTF-8");
+            log.info("消息模型topicExchange-*-消费者-监听消费到消息：{}", message);
+        } catch (Exception e) {
+            log.error("消息模型topicExchange-*-消费者-监听消费发生异常：", e.fillInStackTrace());
+        }
+    }
+
+    /**
+     * 监听并消费队列中的消息-topicExchange-#通配符
+     * @param msg
+     */
+    @RabbitListener(queues = "${mq.topic.queue.two.name}", containerFactory = "singleSimpleStringListenerContainer")
+    public void consumeTopicMsgTwo(@Payload byte[] msg) {
+        try {
+            //监听消息并进行解析
+            String message = new String(msg, "UTF-8");
+            log.info("消息模型topicExchange-#-消费者-监听消费到消息：{}", message);
+        } catch (Exception e) {
+            log.error("消息模型topicExchange-#-消费者-监听消费发生异常：", e.fillInStackTrace());
+        }
+    }
 }
