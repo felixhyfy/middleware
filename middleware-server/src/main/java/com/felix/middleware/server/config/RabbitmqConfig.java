@@ -20,6 +20,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @description: RabbitMQ自定义注入Bean配置
  * @author: Felix
@@ -356,6 +359,7 @@ public class RabbitmqConfig {
 
     /**
      * 单一消费者-确认模式为AUTO
+     *
      * @return
      */
     @Bean(name = "singleListenerContainerAuto")
@@ -390,6 +394,7 @@ public class RabbitmqConfig {
 
     /**
      * 单一消费者-确认模式为MANUAL
+     *
      * @return
      */
     @Bean(name = "manualQueue")
@@ -415,6 +420,7 @@ public class RabbitmqConfig {
 
     /**
      * 创建消费者监听者容器工厂实例-确认模式为MANUAL，并制定监听的队列和消费者
+     *
      * @param manualQueue
      * @return
      */
@@ -458,6 +464,75 @@ public class RabbitmqConfig {
         return BindingBuilder.bind(loginExchange()).to(loginExchange()).with(env.getProperty("mq.login.routing.key.name"));
     }
 
+    /**
+     * 死信队列消息模型构建
+     */
 
+    /**
+     * 创建死信队列
+     *
+     * @return
+     */
+    @Bean
+    public Queue basicDeadQueue() {
+        //创建死信队列的组成成分map，用于存放组成成分的相关成员
+        Map<String, Object> args = new HashMap<>();
+        //创建死信交换机
+        args.put("x-dead-letter-exchange", env.getProperty("mq.dead.exchange.name"));
+        //创建死信路由
+        args.put("x-dead-letter-routing-key", env.getProperty("mq.dead.routing.key.name"));
+        //设定TTL，单位为ms，这里是10s
+        args.put("x-message-ttl", 10000);
+
+        //创建并返回死信队列实例
+        return new Queue(env.getProperty("mq.dead.queue.name"), true, false, false, args);
+    }
+
+    /**
+     * 创建“基本消息模型”的基本交换机-面向生产者
+     *
+     * @return
+     */
+    @Bean
+    public TopicExchange basicProducerExchange() {
+        return new TopicExchange(env.getProperty("mq.producer.basic.exchange.name"), true, false);
+    }
+
+    /**
+     * 创建“基本消息模型”的基本保定-基本交换机+基本路由-面向生产者
+     *
+     * @return
+     */
+    @Bean
+    public Binding basicProducerBinding() {
+        return BindingBuilder.bind(basicDeadQueue()).to(basicProducerExchange()).with(env.getProperty("mq.producer.basic.routing.key.name"));
+    }
+
+    /**
+     * 创建真正的队列-面向消费者
+     * @return
+     */
+    @Bean
+    public Queue realConsumerQueue() {
+        return new Queue(env.getProperty("mq.consumer.real.queue.name"), true);
+    }
+
+    /**
+     * 创建死信交换机
+     * @return
+     */
+    @Bean
+    public TopicExchange basicDeadExchange() {
+        return new TopicExchange(env.getProperty("mq.dead.exchange.name"), true, false);
+    }
+
+    /**
+     * 创建死信路由及其绑定
+     * @return
+     */
+    @Bean
+    public Binding basicDeadBinding() {
+        return BindingBuilder.bind(realConsumerQueue()).to(basicDeadExchange()).with(env.getProperty("mq.dead.routing.key.name"));
+    }
 
 }

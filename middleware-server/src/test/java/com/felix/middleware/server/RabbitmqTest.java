@@ -2,13 +2,11 @@ package com.felix.middleware.server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.felix.middleware.server.rabbitmq.entity.DeadInfo;
 import com.felix.middleware.server.rabbitmq.entity.EventInfo;
 import com.felix.middleware.server.rabbitmq.entity.KnowledgeInfo;
 import com.felix.middleware.server.rabbitmq.entity.Person;
-import com.felix.middleware.server.rabbitmq.publisher.BasicPublisher;
-import com.felix.middleware.server.rabbitmq.publisher.KnowledgeManualPublisher;
-import com.felix.middleware.server.rabbitmq.publisher.KnowledgePublisher;
-import com.felix.middleware.server.rabbitmq.publisher.ModelPublisher;
+import com.felix.middleware.server.rabbitmq.publisher.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -103,4 +101,24 @@ public class RabbitmqTest {
 
         knowledgeManualPublisher.sendAutoMsg(info);
     }
+
+    @Autowired
+    private DeadPublisher deadPublisher;
+
+    @Test
+    public void test8() {
+        DeadInfo info = new DeadInfo(1, "~~~我是第一则消息~~~");
+        deadPublisher.sendMsg(info);
+        //定义对象2
+        info = new DeadInfo(2, "~~~我是第二则消息~~~");
+        deadPublisher.sendMsg(info);
+
+        //等待30秒再结束，目的是为了能看到消费者监听真正队列中的消息
+        /*try {
+            Thread.sleep(25000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+    }
+
 }
