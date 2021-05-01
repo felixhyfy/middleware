@@ -535,4 +535,68 @@ public class RabbitmqConfig {
         return BindingBuilder.bind(realConsumerQueue()).to(basicDeadExchange()).with(env.getProperty("mq.dead.routing.key.name"));
     }
 
+    /**
+     * 用户下单支付超时—RabbitMQ死信队列消息模型构建
+     */
+
+    /**
+     * 创建死信队列
+     * @return
+     */
+    @Bean
+    public Queue orderDeadQueue() {
+        //构建映射Map，用于添加死信队列的组成成分，并最终作为创建死信队列的最后一个参数
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-dead-letter-exchange", env.getProperty("mq.order.dead.exchange.name"));
+        args.put("x-dead-letter-routing-key", env.getProperty("mq.order.dead.routing.key.name"));
+        //设定TTL，单位为ms，在这里为了测试方便，设置为10s，实际业务场景可能为1小时或者更长
+        args.put("x-message-ttl", 10000);
+
+        return new Queue(env.getProperty("mq.order.dead.queue.name"), true, false, false, args);
+    }
+
+    /**
+     * 创建“基本消息模型”的基本交换机-面向生产者
+     * @return
+     */
+    @Bean
+    public TopicExchange orderProducerExchange() {
+        return new TopicExchange(env.getProperty("mq.producer.order.exchange.name"), true, false);
+    }
+
+    /**
+     * 创建“基本消息模型”的基本绑定-基本交换机+基本路由-面向生产者
+     * @return
+     */
+    @Bean
+    public Binding orderProducerBinding() {
+        return BindingBuilder.bind(orderDeadQueue()).to(orderProducerExchange()).with(env.getProperty("mq.producer.order.routing.key.name"));
+    }
+
+    /**
+     * 创建真正队列-面向消费者
+     * @return
+     */
+    @Bean
+    public Queue realOrderConsumerQueue() {
+        return new Queue(env.getProperty("mq.consumer.order.real.queue.name"));
+    }
+
+    /**
+     * 创建死信交换机
+     * @return
+     */
+    @Bean
+    public TopicExchange basicOrderDeadExchange() {
+        return new TopicExchange(env.getProperty("mq.order.dead.exchange.name"), true, false);
+    }
+
+    /**
+     * 创建死信路由及其绑定
+     * @return
+     */
+    @Bean
+    public Binding basicOrderDeadBinding() {
+        return BindingBuilder.bind(realOrderConsumerQueue()).to(basicOrderDeadExchange()).with(env.getProperty("mq.order.dead.routing.key.name"));
+    }
 }
