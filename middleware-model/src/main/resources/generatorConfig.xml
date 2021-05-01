@@ -11,7 +11,7 @@
         <!-- 为模型生成序列化方法-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- 为生成的Java模型创建一个toString方法 -->
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
         <!--生成mapper.xml时覆盖原文件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
@@ -36,12 +36,12 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.felix.middleware.model.mapper"
                              targetProject="middleware-model\src\main\java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="user_order" enableCountByExample="false"
+        <table tableName="user_account" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="mq_order" enableCountByExample="false"
+        <table tableName="user_account_record" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
