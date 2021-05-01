@@ -6,6 +6,7 @@ import com.felix.middleware.server.rabbitmq.entity.EventInfo;
 import com.felix.middleware.server.rabbitmq.entity.KnowledgeInfo;
 import com.felix.middleware.server.rabbitmq.entity.Person;
 import com.felix.middleware.server.rabbitmq.publisher.BasicPublisher;
+import com.felix.middleware.server.rabbitmq.publisher.KnowledgeManualPublisher;
 import com.felix.middleware.server.rabbitmq.publisher.KnowledgePublisher;
 import com.felix.middleware.server.rabbitmq.publisher.ModelPublisher;
 import org.junit.Test;
@@ -38,6 +39,9 @@ public class RabbitmqTest {
 
     @Autowired
     private KnowledgePublisher knowledgePublisher;
+
+    @Autowired
+    private KnowledgeManualPublisher knowledgeManualPublisher;
 
     @Test
     public void test1() throws JsonProcessingException {
@@ -88,5 +92,15 @@ public class RabbitmqTest {
         info.setMode("基于AUTO的消息确认消费模式");
 
         knowledgePublisher.sendAutoMsg(info);
+    }
+
+    @Test
+    public void test7() {
+        KnowledgeInfo info = new KnowledgeInfo();
+        info.setId(10011);
+        info.setCode("manual");
+        info.setMode("基于MANUAL的消息确认消费模式");
+
+        knowledgeManualPublisher.sendAutoMsg(info);
     }
 }

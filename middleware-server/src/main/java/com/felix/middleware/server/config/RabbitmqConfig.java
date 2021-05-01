@@ -1,5 +1,7 @@
 package com.felix.middleware.server.config;
 
+import com.felix.middleware.server.rabbitmq.consumer.KnowledgeConsumer;
+import com.felix.middleware.server.rabbitmq.consumer.KnowledgeManualConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.*;
@@ -7,9 +9,12 @@ import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFacto
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.support.MessagePropertiesConverter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -382,5 +387,77 @@ public class RabbitmqConfig {
     public Binding autoBinding() {
         return BindingBuilder.bind(autoQueue()).to(autoExchange()).with(env.getProperty("mq.auto.knowledge.routing.key.name"));
     }
+
+    /**
+     * 单一消费者-确认模式为MANUAL
+     * @return
+     */
+    @Bean(name = "manualQueue")
+    public Queue manualQueue() {
+        return new Queue(env.getProperty("mq.manual.knowledge.queue.name"), true);
+    }
+
+    @Bean
+    public TopicExchange manualExchange() {
+        return new TopicExchange(env.getProperty("mq.manual.knowledge.exchange.name"), true, false);
+    }
+
+    @Bean
+    public Binding manualBinding() {
+        return BindingBuilder.bind(manualQueue()).to(manualExchange()).with(env.getProperty("mq.manual.knowledge.routing.key.name"));
+    }
+
+    /**
+     * 定义手动确认消费模式对应的消费者监听器实例
+     */
+    @Autowired
+    private KnowledgeManualConsumer knowledgeManualConsumer;
+
+    /**
+     * 创建消费者监听者容器工厂实例-确认模式为MANUAL，并制定监听的队列和消费者
+     * @param manualQueue
+     * @return
+     */
+    @Bean(name = "simpleContainerManual")
+    public SimpleMessageListenerContainer simpleContainer(@Qualifier("manualQueue") Queue manualQueue) {
+        //创建消息监听器容器实例
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        //设置链接工厂
+        container.setConnectionFactory(connectionFactory);
+
+        //单一消费者实例配置
+        container.setConcurrentConsumers(1);
+        container.setMaxConcurrentConsumers(1);
+        container.setPrefetchCount(1);
+
+        //TODO:设置消息的确认模式，采用手动确认消费机制
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        //指定该容器中监听的队列
+        container.setQueues(manualQueue);
+        //指定该容器中消息监听器，即消费者
+        container.setMessageListener(knowledgeManualConsumer);
+
+        return container;
+    }
+
+    /**
+     * 用户登录成功写日志消息模型创建
+     */
+    @Bean(name = "loginQueue")
+    public Queue loginQueue() {
+        return new Queue(env.getProperty("mq.login.queue.name"), true);
+    }
+
+    @Bean
+    public TopicExchange loginExchange() {
+        return new TopicExchange(env.getProperty("mq.login.exchange.name"), true, false);
+    }
+
+    @Bean
+    public Binding loginBinding() {
+        return BindingBuilder.bind(loginExchange()).to(loginExchange()).with(env.getProperty("mq.login.routing.key.name"));
+    }
+
+
 
 }
