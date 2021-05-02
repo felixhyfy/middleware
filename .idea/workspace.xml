@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: RabbitMQ死信队列-订单超时实战">
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/DataBaseLockController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/distributelock/LockOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/distributelock/LockThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/UserAccountDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IDataBaseLockService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/DataBaseLockServiceImpl.java" afterDir="false" />
+    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: 基于数据库的乐观锁">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/DataBaseLockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/DataBaseLockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IDataBaseLockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IDataBaseLockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/DataBaseLockServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/DataBaseLockServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +242,7 @@
       <workItem from="1619445031251" duration="2542000" />
       <workItem from="1619447704317" duration="458000" />
       <workItem from="1619496031648" duration="7651000" />
-      <workItem from="1619592525345" duration="82001000" />
+      <workItem from="1619592525345" duration="87576000" />
     </task>
     <task id="LOCAL-00001" summary="init: Mybatis逆向工程生成代码">
       <created>1619525949608</created>
@@ -332,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619867724876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="init: 基于数据库的乐观锁">
+      <created>1619878558455</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1619878558455</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +366,8 @@
     <MESSAGE value="init: RabbitMQ登录日志实战" />
     <MESSAGE value="init: RabbitMQ延迟队列" />
     <MESSAGE value="init: RabbitMQ死信队列-订单超时实战" />
-    <option name="LAST_COMMIT_MESSAGE" value="init: RabbitMQ死信队列-订单超时实战" />
+    <MESSAGE value="init: 基于数据库的乐观锁" />
+    <option name="LAST_COMMIT_MESSAGE" value="init: 基于数据库的乐观锁" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="235" key="#Auto_Import" timestamp="1619585254951">
@@ -382,10 +386,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="720" y="362" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619772466267" />
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619873472098">
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619935176829">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619873472098" />
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619935176829" />
     <state x="691" y="501" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619522761368">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -394,10 +398,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="737" y="440" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500703266" />
-    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619867723848">
+    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619934822727">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619867723848" />
+    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619934822727" />
     <state x="151" y="98" key="DiffContextDialog" timestamp="1619600433453">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -406,42 +410,42 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="331" key="FileChooserDialogImpl/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500353324" />
-    <state width="2005" height="243" key="GridCell.Tab.0.bottom" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.0.bottom" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.0.center" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
+    <state width="2005" height="243" key="GridCell.Tab.0.center" timestamp="1619936014834">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.0.left" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014834" />
+    <state width="2005" height="243" key="GridCell.Tab.0.left" timestamp="1619936014834">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.0.right" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014834" />
+    <state width="2005" height="243" key="GridCell.Tab.0.right" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.1.bottom" timestamp="1619878487343">
+    <state width="2005" height="243" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
+    <state width="2005" height="243" key="GridCell.Tab.1.bottom" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487343" />
-    <state width="2005" height="243" key="GridCell.Tab.1.center" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
+    <state width="2005" height="243" key="GridCell.Tab.1.center" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.1.left" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
+    <state width="2005" height="243" key="GridCell.Tab.1.left" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
-    <state width="2005" height="243" key="GridCell.Tab.1.right" timestamp="1619878487342">
+    <state width="2005" height="243" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
+    <state width="2005" height="243" key="GridCell.Tab.1.right" timestamp="1619936014835">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878487342" />
+    <state width="2005" height="243" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
     <state width="2005" height="392" key="GridCell.Tab.2.bottom" timestamp="1619878236344">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>

@@ -41,8 +41,12 @@ public class DataBaseLockController {
         try {
             //调用核心业务逻辑处理方法-不加锁
             //dataBaseLockService.takeMoney(dto);
-            //调用核心业务逻辑处理方法-加锁
-            dataBaseLockService.takeMoneyWithLock(dto);
+
+            //调用核心业务逻辑处理方法-加乐观锁
+            //dataBaseLockService.takeMoneyWithLock(dto);
+
+            //加悲观锁的情况
+            dataBaseLockService.takeMoneyWithLockNegative(dto);
         } catch (Exception e) {
             response = new BaseResponse(StatusCode.FAIL.getCode(), e.getMessage());
         }

@@ -84,8 +84,42 @@ public class DataBaseLockServiceImpl implements IDataBaseLockService {
 
                 log.info("当前待提现的金额为：{} 用户账户余额为：{}", dto.getAmount(), userAccount.getAmount());
             } else {
-                throw new Exception("账户不存在或者账户余额不足！");
+                throw new Exception("当前账户提现失败！");
             }
+        } else {
+            throw new Exception("账户不存在或者账户余额不足！");
+        }
+    }
+
+    /**
+     * 用户账户提取金额处理-悲观锁处理方式-for update
+     *
+     * @param dto
+     * @throws Exception
+     */
+    @Override
+    public void takeMoneyWithLockNegative(UserAccountDto dto) throws Exception {
+        //查询用户账户实体记录-for update的方式
+        UserAccount userAccount = userAccountMapper.selectByUserIdLock(dto.getUserId());
+
+        if (userAccount != null && userAccount.getAmount().doubleValue() - dto.getAmount() >= 0) {
+            //如果足够被提现，则更新现有的账户余额
+            int res = userAccountMapper.updateAmountLock(dto.getAmount(), userAccount.getId());
+            if (res > 0) {
+                //同时记录提现成功时的记录
+                UserAccountRecord record = new UserAccountRecord();
+                record.setCreateTime(new Date());
+                record.setAccountId(userAccount.getId());
+                record.setAmount(BigDecimal.valueOf(dto.getAmount()));
+
+                userAccountRecordMapper.insert(record);
+
+                log.info("悲观锁处理方式-当前待提现的金额为：{} 用户账户余额为：{}", dto.getAmount(), userAccount.getAmount());
+            } else {
+                throw new Exception("当前账户提现失败！");
+            }
+        } else {
+            throw new Exception("账户不存在或者账户余额不足！");
         }
     }
 }

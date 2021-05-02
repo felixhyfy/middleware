@@ -21,4 +21,11 @@ public interface IDataBaseLockService {
      */
     void takeMoneyWithLock(UserAccountDto dto) throws Exception;
 
+    /**
+     * 用户账户提取金额处理-悲观锁处理方式-for update
+     * @param dto
+     * @throws Exception
+     */
+    void takeMoneyWithLockNegative(UserAccountDto dto) throws Exception;
+
 }
