@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: 基于数据库的悲观锁实现">
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/BookRobController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/UserRegController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/BookRobDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/UserRegDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IBookRobService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IUserRegService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/BookRobServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/UserRegServiceImpl.java" afterDir="false" />
+    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: SpringBoot整合Redisson依赖">
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/config/RedissonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/test/java/com/felix/middleware/server/RedissonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-api/target/middleware-api-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-api/target/middleware-api-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-model/target/middleware-model-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/target/middleware-model-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-server/target/_middleware_1.0-SNAPSHOT.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware-server/target/_middleware_1.0-SNAPSHOT.jar.original" beforeDir="false" />
@@ -108,7 +101,7 @@
       <recent name="E:\Java\middleware\middleware-server\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.MainApplication">
+  <component name="RunManager" selected="JUnit.RedissonTest.test1">
     <configuration name="Generator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.felix.middleware.model.Generator" />
       <module name="middleware-model" />
@@ -118,22 +111,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RabbitmqTest.test5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="middleware-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.felix.middleware.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
-      <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RabbitmqTest" />
-      <option name="METHOD_NAME" value="test5" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -181,6 +158,22 @@
       <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
       <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RabbitmqTest" />
       <option name="METHOD_NAME" value="test8" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedissonTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="middleware-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.felix.middleware.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.felix.middleware.server" />
+      <option name="MAIN_CLASS_NAME" value="com.felix.middleware.server.RedissonTest" />
+      <option name="METHOD_NAME" value="test1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -242,11 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RedissonTest.test1" />
         <item itemvalue="Application.Generator" />
         <item itemvalue="JUnit.RabbitmqTest.test8" />
         <item itemvalue="JUnit.RabbitmqTest.test7" />
         <item itemvalue="JUnit.RabbitmqTest.test6" />
-        <item itemvalue="JUnit.RabbitmqTest.test5" />
       </list>
     </recent_temporary>
   </component>
@@ -266,7 +259,7 @@
       <workItem from="1619445031251" duration="2542000" />
       <workItem from="1619447704317" duration="458000" />
       <workItem from="1619496031648" duration="7651000" />
-      <workItem from="1619592525345" duration="107337000" />
+      <workItem from="1619592525345" duration="108150000" />
     </task>
     <task id="LOCAL-00001" summary="init: Mybatis逆向工程生成代码">
       <created>1619525949608</created>
@@ -366,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619936531517</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="init: 基于Zookeeper的分布式锁实现">
+      <created>1619960351114</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1619960351114</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +399,9 @@
     <MESSAGE value="init: RabbitMQ死信队列-订单超时实战" />
     <MESSAGE value="init: 基于数据库的乐观锁" />
     <MESSAGE value="init: 基于数据库的悲观锁实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="init: 基于数据库的悲观锁实现" />
+    <MESSAGE value="init: 基于Zookeeper的分布式锁实现" />
+    <MESSAGE value="init: SpringBoot整合Redisson依赖" />
+    <option name="LAST_COMMIT_MESSAGE" value="init: SpringBoot整合Redisson依赖" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="235" key="#Auto_Import" timestamp="1619585254951">
@@ -430,10 +432,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="737" y="440" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500703266" />
-    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619942228662">
+    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619961220266">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942228662" />
+    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619961220266" />
     <state x="151" y="98" key="DiffContextDialog" timestamp="1619600433453">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -442,42 +444,42 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="331" key="FileChooserDialogImpl/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500353324" />
-    <state width="2005" height="358" key="GridCell.Tab.0.bottom" timestamp="1619957780410">
+    <state width="2005" height="358" key="GridCell.Tab.0.bottom" timestamp="1619961189240">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="358" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
-    <state width="2005" height="358" key="GridCell.Tab.0.center" timestamp="1619957780410">
+    <state width="2005" height="358" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619961189240" />
+    <state width="2005" height="358" key="GridCell.Tab.0.center" timestamp="1619961189240">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="358" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
-    <state width="2005" height="358" key="GridCell.Tab.0.left" timestamp="1619957780410">
+    <state width="2005" height="358" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619961189240" />
+    <state width="2005" height="358" key="GridCell.Tab.0.left" timestamp="1619961189240">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="358" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
-    <state width="2005" height="358" key="GridCell.Tab.0.right" timestamp="1619957780410">
+    <state width="2005" height="358" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619961189240" />
+    <state width="2005" height="358" key="GridCell.Tab.0.right" timestamp="1619961189240">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="358" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
-    <state width="2005" height="358" key="GridCell.Tab.1.bottom" timestamp="1619957780411">
+    <state width="2005" height="358" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619961189240" />
+    <state width="2005" height="358" key="GridCell.Tab.1.bottom" timestamp="1619960988262">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="358" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
-    <state width="2005" height="358" key="GridCell.Tab.1.center" timestamp="1619957780411">
+    <state width="2005" height="358" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619960988262" />
+    <state width="2005" height="358" key="GridCell.Tab.1.center" timestamp="1619960988262">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="358" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
-    <state width="2005" height="358" key="GridCell.Tab.1.left" timestamp="1619957780411">
+    <state width="2005" height="358" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619960988262" />
+    <state width="2005" height="358" key="GridCell.Tab.1.left" timestamp="1619960988262">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="358" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
-    <state width="2005" height="358" key="GridCell.Tab.1.right" timestamp="1619957780411">
+    <state width="2005" height="358" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619960988262" />
+    <state width="2005" height="358" key="GridCell.Tab.1.right" timestamp="1619960988262">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="358" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
+    <state width="2005" height="358" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619960988262" />
     <state width="2005" height="392" key="GridCell.Tab.2.bottom" timestamp="1619942885577">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -530,10 +532,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="381" key="save.file.as.template.dialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619855771688" />
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619944678295">
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619960960254">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619944678295" />
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619960960254" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
