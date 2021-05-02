@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: 基于数据库的乐观锁">
+    <list default="true" id="9bd61e66-0ac8-42b7-b4c1-e959bb3005f5" name="Default Changelist" comment="init: 基于数据库的悲观锁实现">
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/BookRobController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/UserRegController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/BookRobDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/dto/UserRegDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IBookRobService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IUserRegService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/BookRobServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/UserRegServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/DataBaseLockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/controller/lock/DataBaseLockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IDataBaseLockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/IDataBaseLockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/DataBaseLockServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/service/impl/DataBaseLockServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-api/target/middleware-api-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-api/target/middleware-api-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-model/target/middleware-model-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-model/target/middleware-model-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/java/com/felix/middleware/server/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/_middleware_1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/_middleware_1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/classes/server/MainApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/middleware-server-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/middleware_1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-server/target/middleware_1.0-SNAPSHOT.jar.original" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +266,7 @@
       <workItem from="1619445031251" duration="2542000" />
       <workItem from="1619447704317" duration="458000" />
       <workItem from="1619496031648" duration="7651000" />
-      <workItem from="1619592525345" duration="87576000" />
+      <workItem from="1619592525345" duration="107337000" />
     </task>
     <task id="LOCAL-00001" summary="init: Mybatis逆向工程生成代码">
       <created>1619525949608</created>
@@ -335,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619878558455</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="init: 基于数据库的悲观锁实现">
+      <created>1619936531517</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1619936531517</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +398,8 @@
     <MESSAGE value="init: RabbitMQ延迟队列" />
     <MESSAGE value="init: RabbitMQ死信队列-订单超时实战" />
     <MESSAGE value="init: 基于数据库的乐观锁" />
-    <option name="LAST_COMMIT_MESSAGE" value="init: 基于数据库的乐观锁" />
+    <MESSAGE value="init: 基于数据库的悲观锁实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="init: 基于数据库的悲观锁实现" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="235" key="#Auto_Import" timestamp="1619585254951">
@@ -386,10 +418,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="720" y="362" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619772466267" />
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619935176829">
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser" timestamp="1619953174317">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619935176829" />
+    <state x="830" y="292" key="#com.intellij.ide.util.MemberChooser/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619953174317" />
     <state x="691" y="501" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1619522761368">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -398,10 +430,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="737" y="440" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500703266" />
-    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619934822727">
+    <state x="575" y="168" key="CommitChangelistDialog2" timestamp="1619942228662">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619934822727" />
+    <state x="575" y="168" key="CommitChangelistDialog2/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942228662" />
     <state x="151" y="98" key="DiffContextDialog" timestamp="1619600433453">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -410,58 +442,58 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="331" key="FileChooserDialogImpl/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619500353324" />
-    <state width="2005" height="243" key="GridCell.Tab.0.bottom" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.0.bottom" timestamp="1619957780410">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="243" key="GridCell.Tab.0.center" timestamp="1619936014834">
+    <state width="2005" height="358" key="GridCell.Tab.0.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
+    <state width="2005" height="358" key="GridCell.Tab.0.center" timestamp="1619957780410">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014834" />
-    <state width="2005" height="243" key="GridCell.Tab.0.left" timestamp="1619936014834">
+    <state width="2005" height="358" key="GridCell.Tab.0.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
+    <state width="2005" height="358" key="GridCell.Tab.0.left" timestamp="1619957780410">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014834" />
-    <state width="2005" height="243" key="GridCell.Tab.0.right" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.0.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
+    <state width="2005" height="358" key="GridCell.Tab.0.right" timestamp="1619957780410">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state width="1663" height="447" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@-2560.0.1707.1067" timestamp="1619857274459" />
-    <state width="2005" height="243" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="243" key="GridCell.Tab.1.bottom" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.0.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780410" />
+    <state width="2005" height="358" key="GridCell.Tab.1.bottom" timestamp="1619957780411">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="243" key="GridCell.Tab.1.center" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.1.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
+    <state width="2005" height="358" key="GridCell.Tab.1.center" timestamp="1619957780411">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="243" key="GridCell.Tab.1.left" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.1.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
+    <state width="2005" height="358" key="GridCell.Tab.1.left" timestamp="1619957780411">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="243" key="GridCell.Tab.1.right" timestamp="1619936014835">
+    <state width="2005" height="358" key="GridCell.Tab.1.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
+    <state width="2005" height="358" key="GridCell.Tab.1.right" timestamp="1619957780411">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="243" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619936014835" />
-    <state width="2005" height="392" key="GridCell.Tab.2.bottom" timestamp="1619878236344">
+    <state width="2005" height="358" key="GridCell.Tab.1.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619957780411" />
+    <state width="2005" height="392" key="GridCell.Tab.2.bottom" timestamp="1619942885577">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="392" key="GridCell.Tab.2.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878236344" />
-    <state width="2005" height="392" key="GridCell.Tab.2.center" timestamp="1619878236344">
+    <state width="2005" height="392" key="GridCell.Tab.2.bottom/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942885577" />
+    <state width="2005" height="392" key="GridCell.Tab.2.center" timestamp="1619942885577">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="392" key="GridCell.Tab.2.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878236344" />
-    <state width="2005" height="392" key="GridCell.Tab.2.left" timestamp="1619878236344">
+    <state width="2005" height="392" key="GridCell.Tab.2.center/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942885577" />
+    <state width="2005" height="392" key="GridCell.Tab.2.left" timestamp="1619942885577">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="392" key="GridCell.Tab.2.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878236344" />
-    <state width="2005" height="392" key="GridCell.Tab.2.right" timestamp="1619878236344">
+    <state width="2005" height="392" key="GridCell.Tab.2.left/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942885577" />
+    <state width="2005" height="392" key="GridCell.Tab.2.right" timestamp="1619942885577">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state width="2005" height="392" key="GridCell.Tab.2.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619878236344" />
+    <state width="2005" height="392" key="GridCell.Tab.2.right/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619942885577" />
     <state x="505" y="151" key="SettingsEditor" timestamp="1619855866607">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
@@ -498,10 +530,10 @@
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
     <state x="805" y="381" key="save.file.as.template.dialog/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619855771688" />
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619877465279">
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup" timestamp="1619944678295">
       <screen x="0" y="0" width="2048" height="1152" />
     </state>
-    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619877465279" />
+    <state x="687" y="253" width="672" height="678" key="search.everywhere.popup/-2560.0.1707.1067/0.0.2048.1152@0.0.2048.1152" timestamp="1619944678295" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
