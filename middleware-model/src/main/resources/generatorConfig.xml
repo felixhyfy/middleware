@@ -36,12 +36,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.felix.middleware.model.mapper"
                              targetProject="middleware-model\src\main\java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="book_rob" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="book_stock" enableCountByExample="false"
+        <table tableName="praise" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
