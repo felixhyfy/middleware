@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.felix.middleware.model.mapper.BookStockMapper">
+  <resultMap id="BaseResultMap" type="com.felix.middleware.model.entity.BookStock">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="book_no" jdbcType="VARCHAR" property="bookNo" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="is_active" jdbcType="TINYINT" property="isActive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, book_no, stock, is_active
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.felix.middleware.model.entity.BookStock">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into book_stock (book_no, stock, is_active
+      )
+    values (#{bookNo,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, #{isActive,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.felix.middleware.model.entity.BookStock">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into book_stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookNo != null">
+        book_no,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookNo != null">
+        #{bookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.felix.middleware.model.entity.BookStock">
+    update book_stock
+    <set>
+      <if test="bookNo != null">
+        book_no = #{bookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.felix.middleware.model.entity.BookStock">
+    update book_stock
+    set book_no = #{bookNo,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByBookNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_stock
+    where is_active = 1 and book_no = #{bookNo}
+  </select>
+
+  <update id="updateStock">
+    update book_stock
+    set stock = stock - 1
+    where is_active = 1 and book_no = #{bookNo}
+  </update>
+
+  <update id="updateStockWithLock">
+    update book_stock
+    set stock = stock - 1
+    where is_active = 1 and book_no = #{bookNo} and stock > 0 and (stock - 1) >= 0
+  </update>
+</mapper>

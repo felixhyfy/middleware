@@ -599,4 +599,47 @@ public class RabbitmqConfig {
     public Binding basicOrderDeadBinding() {
         return BindingBuilder.bind(realOrderConsumerQueue()).to(basicOrderDeadExchange()).with(env.getProperty("mq.order.dead.routing.key.name"));
     }
+
+    /**Redisson篇章-RabbitMQ死信队列的缺陷**/
+
+    //创建死信队列-由死信交换机+死信路由组成
+    @Bean
+    public Queue redissonBasicDeadQueue(){
+        Map<String,Object> argsMap=new HashMap<>();
+        argsMap.put("x-dead-letter-exchange", env.getProperty("mq.redisson.dead.exchange.name"));
+        argsMap.put("x-dead-letter-routing-key", env.getProperty("mq.redisson.dead.routing.key.name"));
+        return new Queue(env.getProperty("mq.redisson.dead.queue.name"),true,false,false,argsMap);
+    }
+
+    //创建基本交换机
+    @Bean
+    public TopicExchange redissonBasicExchange() {
+        return new TopicExchange(env.getProperty("mq.redisson.dead.basic.exchange.name"), true, false);
+    }
+
+    //创建基本路由及其绑定-绑定到死信队列
+    @Bean
+    public Binding redissonBasicBinding() {
+        return BindingBuilder.bind(redissonBasicDeadQueue())
+                .to(redissonBasicExchange()).with(env.getProperty("mq.redisson.dead.basic.routing.key.name"));
+    }
+
+    //创建死信交换机
+    @Bean
+    public TopicExchange redissonBasicDeadExchange() {
+        return new TopicExchange(env.getProperty("mq.redisson.dead.exchange.name"), true, false);
+    }
+
+    //创建真正队列 - 面向消费者
+    @Bean
+    public Queue redissonBasicDeadRealQueue() {
+        return new Queue(env.getProperty("mq.redisson.real.queue.name"), true);
+    }
+
+    //创建死信路由及其绑定-绑定到真正的队列
+    @Bean
+    public Binding redissonBasicDeadRealBinding() {
+        return BindingBuilder.bind(redissonBasicDeadRealQueue())
+                .to(redissonBasicDeadExchange()).with(env.getProperty("mq.redisson.dead.routing.key.name"));
+    }
 }
