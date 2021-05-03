@@ -22,4 +22,11 @@ public interface IBookRobService {
      * @throws Exception
      */
     void robWithZkLock(BookRobDto dto) throws Exception;
+
+    /**
+     * 书籍抢购-加Redisson分布式锁
+     * @param dto
+     * @throws Exception
+     */
+    void robWithRedisson(BookRobDto dto) throws Exception;
 }

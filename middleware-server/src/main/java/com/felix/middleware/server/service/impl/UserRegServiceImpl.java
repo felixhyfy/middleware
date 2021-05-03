@@ -6,6 +6,8 @@ import com.felix.middleware.server.dto.UserRegDto;
 import com.felix.middleware.server.service.IUserRegService;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -44,6 +46,9 @@ public class UserRegServiceImpl implements IUserRegService {
      * ZNode节点的路径前缀
      */
     private static final String PATH_PREFIX = "/middleware/zkLock/";
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     /**
      * 处理用户提交注册的请求-不加分布式锁
@@ -153,6 +158,50 @@ public class UserRegServiceImpl implements IUserRegService {
         } finally {
             //不管发生何种情况，在处理完核心业务逻辑之后，都需要释放该分布式锁
             mutex.release();
+        }
+    }
+
+    /**
+     * 处理用户提交注册的请求-加Redisson分布式锁
+     *
+     * @param dto
+     * @throws Exception
+     */
+    @Override
+    public void userRegRedisson(UserRegDto dto) throws Exception {
+        //定义锁的名称
+        final String lockName = "redissonOneLock-" + dto.getUserName();
+        //获取分布式锁实例
+        RLock lock = redissonClient.getLock(lockName);
+        try {
+            //操作共享资源之前上锁，10秒之后自动释放
+            lock.lock(10L, TimeUnit.SECONDS);
+            //TODO：以下为真正的核心处理逻辑
+            //根据用户名查询用户实体信息
+            UserReg reg = userRegMapper.selectByUserName(dto.getUserName());
+            if (reg == null) {
+                //未注册
+                log.info("---加了Redisson分布式锁之一次性锁---，当前用户名为：{}", dto.getUserName());
+                //创建用户注册实体信息
+                UserReg entity = new UserReg();
+                BeanUtils.copyProperties(dto, entity);
+                entity.setCreateTime(new Date());
+
+                userRegMapper.insertSelective(entity);
+            } else {
+                //已被注册，抛出异常
+                throw new Exception("用户信息已经存在！");
+            }
+        } catch (Exception e) {
+            log.error("---获取Redisson的分布式锁失败！---");
+            throw e;
+        } finally {
+            //释放锁
+            if (lock != null) {
+                lock.unlock();
+                //在某些严格的业务场景下，也可以调用强制释放分布式锁的方法
+                //lock.forceUnlock();
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ import com.felix.middleware.server.service.IBookRobService;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreMutex;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +41,9 @@ public class BookRobServiceImpl implements IBookRobService {
     private CuratorFramework zkClient;
 
     private static final String PATH_PREFIX = "/middleware/zkLock/";
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     /**
      * 书籍抢购-不加分布式锁
@@ -166,6 +171,59 @@ public class BookRobServiceImpl implements IBookRobService {
         } finally {
             //TODO：不管发生何种情况，在处理完核心业务逻辑之后，需要释放该分布式锁
             mutex.release();
+        }
+    }
+
+    /**
+     * 书籍抢购-加Redisson分布式锁
+     *
+     * @param dto
+     * @throws Exception
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void robWithRedisson(BookRobDto dto) throws Exception {
+        //定义分布式锁的名称
+        final String lockName = "redisssonTryLock-" + dto.getBookNo() + "-" + dto.getUserId();
+        //获取Redisson的分布式锁实例
+        RLock lock = redissonClient.getLock(lockName);
+
+        try {
+            //尝试获取分布式锁，最多等待100s，上锁之后10s自动解锁
+            boolean result = lock.tryLock(100, 10, TimeUnit.SECONDS);
+            if (result) {
+                //TODO：真正的核心逻辑
+                //根据书籍编号查询记录
+                BookStock stock = bookStockMapper.selectByBookNo(dto.getBookNo());
+                //统计每个用户每本书的抢购数量
+                int total = bookRobMapper.countByBookNoUserId(dto.getUserId(), dto.getBookNo());
+                //商品记录存在、库存充足、而且用户还没有抢购过该书，则代表当前用户可以抢购
+                if (stock != null && stock.getStock() > 0 && total <= 0) {
+                    //当前用户抢购到书籍，库存减1
+                    int res = bookStockMapper.updateStockWithLock(dto.getBookNo());
+                    //如果允许商品超卖-达到解营销的目的，则可以调用下面的方法
+                    //int res = bookStockMapper.updateStock(dto.getBookNo());
+                    //更新库存成功后，需要添加抢购记录
+                    if (res > 0) {
+                        //创建书籍抢购记录实体信息
+                        BookRob entity = new BookRob();
+                        BeanUtils.copyProperties(dto, entity);
+                        entity.setRobTime(new Date());
+
+                        bookRobMapper.insertSelective(entity);
+
+                        log.info("---处理书籍抢购逻辑-加Redisson分布式锁---， 当前线程成功抢到书籍：{}", dto);
+                    } else {
+                        throw new Exception("该书籍记录不存在或者库存不足，或者当前用户已经抢购过该书籍！");
+                    }
+                } else {
+                    throw new Exception("---获取Redisson分布式锁失败！---");
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            lock.unlock();
         }
     }
 }

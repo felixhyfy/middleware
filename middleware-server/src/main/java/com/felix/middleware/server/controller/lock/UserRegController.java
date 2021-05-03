@@ -43,7 +43,10 @@ public class UserRegController {
             //userRegService.userRegWithLock(dto);
 
             //加Zookeeper分布式锁
-            userRegService.userRegWithZkLock(dto);
+            //userRegService.userRegWithZkLock(dto);
+
+            //加Redisson分布式锁
+            userRegService.userRegRedisson(dto);
         } catch (Exception e) {
             response = new BaseResponse(StatusCode.FAIL.getCode(), e.getMessage());
         }

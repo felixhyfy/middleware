@@ -29,4 +29,11 @@ public interface IUserRegService {
      * @throws Exception
      */
     void userRegWithZkLock(UserRegDto dto) throws Exception;
+
+    /**
+     * 处理用户提交注册的请求-加Redisson分布式锁
+     * @param dto
+     * @throws Exception
+     */
+    void userRegRedisson(UserRegDto dto) throws Exception;
 }
