@@ -75,6 +75,7 @@ public class PraiseServiceImpl implements IPraiseService {
                 redisPraiseService.cachePraiseBlog(dto.getBlogId(), dto.getUserId(), 1);
 
                 //触发排行榜
+                this.cachePraiseTotal();
             }
         }
     }
@@ -116,6 +117,7 @@ public class PraiseServiceImpl implements IPraiseService {
                     redisPraiseService.cachePraiseBlog(dto.getBlogId(), dto.getUserId(), 1);
 
                     //触发排行榜
+                    this.cachePraiseTotal();
                 }
             }
         } catch (Exception e) {
@@ -143,6 +145,7 @@ public class PraiseServiceImpl implements IPraiseService {
                 redisPraiseService.cachePraiseBlog(dto.getBlogId(), dto.getUserId(), 0);
 
                 //触发排行榜
+                this.cachePraiseTotal();
             }
         }
     }
@@ -168,7 +171,7 @@ public class PraiseServiceImpl implements IPraiseService {
      */
     @Override
     public Collection<PraiseRankDto> getRankNoRedisson() throws Exception {
-        return null;
+        return praiseMapper.getPraiseRank();
     }
 
     /**
@@ -179,6 +182,17 @@ public class PraiseServiceImpl implements IPraiseService {
      */
     @Override
     public Collection<PraiseRankDto> getRankWithRedisson() throws Exception {
-        return null;
+        return redisPraiseService.getBlogPraiseRank();
+    }
+
+    /**
+     * 记录当前博客id-点赞总数-实体排行榜
+     */
+    private void cachePraiseTotal() {
+        try {
+            redisPraiseService.rankBlogPraise();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

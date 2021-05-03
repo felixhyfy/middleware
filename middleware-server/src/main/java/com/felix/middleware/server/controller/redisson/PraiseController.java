@@ -96,4 +96,17 @@ public class PraiseController {
         return response;
     }
 
+    @RequestMapping(value = PREFIX + "/total/rank", method = RequestMethod.GET)
+    public BaseResponse rankPraise() {
+        BaseResponse response = new BaseResponse(StatusCode.SUCCESS);
+        try {
+            response.setData(praiseService.getRankWithRedisson());
+        } catch (Exception e) {
+            log.error("获取博客点赞排行榜-发生异常", e.fillInStackTrace());
+            response = new BaseResponse(StatusCode.FAIL.getCode(), e.getMessage());
+        }
+
+        return response;
+    }
+
 }

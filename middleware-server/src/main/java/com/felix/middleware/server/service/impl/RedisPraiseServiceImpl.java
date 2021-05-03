@@ -1,8 +1,10 @@
 package com.felix.middleware.server.service.impl;
 
 import com.felix.middleware.model.dto.PraiseRankDto;
+import com.felix.middleware.model.mapper.PraiseMapper;
 import com.felix.middleware.server.service.IRedisPraiseService;
 import org.assertj.core.util.Strings;
+import org.redisson.api.RList;
 import org.redisson.api.RLock;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -31,6 +33,9 @@ public class RedisPraiseServiceImpl implements IRedisPraiseService {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private PraiseMapper praiseMapper;
 
 
     /**
@@ -124,7 +129,18 @@ public class RedisPraiseServiceImpl implements IRedisPraiseService {
      */
     @Override
     public void rankBlogPraise() throws Exception {
-
+        //定义用于缓存排行榜的Key
+        final String key = "praiseRankListKey";
+        //根据数据库查询语句得到已经排好序的博客实体对象列表
+        List<PraiseRankDto> list = praiseMapper.getPraiseRank();
+        if (list != null && list.size() > 0) {
+            //获取Redisson的列表组件RList实例
+            RList<PraiseRankDto> rList = redissonClient.getList(key);
+            //先清空缓存中的列表数据
+            rList.clear();
+            //将得到的最新的排行榜更新至缓存中
+            rList.addAll(list);
+        }
     }
 
     /**
@@ -135,6 +151,11 @@ public class RedisPraiseServiceImpl implements IRedisPraiseService {
      */
     @Override
     public List<PraiseRankDto> getBlogPraiseRank() throws Exception {
-        return null;
+        //定义用于缓存排行榜的Key
+        final String key = "praiseRankListKey";
+        //获取Redisson的列表组件RList实例
+        RList<PraiseRankDto> rList = redissonClient.getList(key);
+        //获取缓存中最新的排行榜
+        return rList.readAll();
     }
 }
